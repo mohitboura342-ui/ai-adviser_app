@@ -1,0 +1,30 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with referral and unlock status.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 256 },
+        "referralCode": { "type": "string", "maxLength": 50 },
+        "referredBy": { "type": "string", "maxLength": 50 },
+        "paymentStatus": { "type": "string", "enum": ["pending", "completed"] },
+        "adviserUnlocked": { "type": "boolean" },
+        "unlockSource": { "type": "string", "enum": ["Self Payment", "Referral", "Manual", "None"] },
+        "paymentId": { "type": "string", "maxLength": 100 },
+        "referralCount": { "type": "number" },
+        "successfulReferrals": { "type": "number" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["uid", "email", "referralCode", "adviserUnlocked", "referralCount", "successfulReferrals", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User profile documents."
+    }
+  }
+}
